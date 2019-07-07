@@ -77,31 +77,6 @@ postgresql_{{ extension_name }}_extension_packages:
   - names: {{ pkgs }}
 
     {%- endif %}
-
-database_{{ database_name }}_{{ extension_name }}_extension_present:
-  postgres_extension.present:
-  - name: {{ extension_name }}
-  - maintenance_db: {{ database_name }}
-  - user: postgres
-  {%- if grains.get('noservices') %}
-  - onlyif: /bin/false
-  {%- endif %}
-  - require:
-    - postgres_database: postgresql_database_{{ database_name }}
-
-    {%- else %}
-
-database_{{ database_name }}_{{ extension_name }}_extension_absent:
-  postgres_extension.present:
-  - name: {{ extension_name }}
-  - maintenance_db: {{ database_name }}
-  - user: postgres
-  {%- if grains.get('noservices') %}
-  - onlyif: /bin/false
-  {%- endif %}
-  - require:
-    - postgres_database: postgresql_database_{{ database_name }}
-
     {%- endif %}
   {%- endfor %}
 {%- endfor %}
