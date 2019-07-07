@@ -78,7 +78,7 @@ postgresql_database_{{ svr_name|default('localhost') }}_{{ database_name }}_{{ n
   {%- endif %}
     - name: {{ name }}
     - maintenance_db: {{ database_name }}
-    - user: root
+    - user: postgres
     {%- if admin is defined %}
     {%- for k, p in admin.iteritems() %}
     - db_{{ k }}: {{ p }}
